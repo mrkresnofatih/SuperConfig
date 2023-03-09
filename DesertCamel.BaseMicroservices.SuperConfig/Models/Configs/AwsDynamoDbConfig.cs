@@ -6,7 +6,6 @@
 
         public string TableName { get; set; }
         public string Region { get; set; }
-        public string Profile { get; set; }
         public string PartitionKeyName { get; set; }
         public string SortKeyName { get; set; }
     }

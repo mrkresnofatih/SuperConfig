@@ -23,9 +23,10 @@ namespace DesertCamel.BaseMicroservices.SuperConfig.Extensions
                     break;
                 case AppConstants.ProviderTypes.AWS_DYNAMODB:
                     services.Configure<AwsDynamoDbConfig>(configuration.GetSection(AwsDynamoDbConfig.AwsDynamoDbSection));
+                    services.AddScoped<IConfigService, AwsDynamoDbConfigService>();
                     break;
                 case AppConstants.ProviderTypes.GOOGLE_FIRESTORE:
-                    break;
+                    throw new Exception("No implementation yet");
                 default:
                     throw new Exception("Unknown Selected Database");
             }
