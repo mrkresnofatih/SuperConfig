@@ -1,4 +1,5 @@
-﻿using DesertCamel.BaseMicroservices.SuperConfig.Extensions;
+﻿using DesertCamel.BaseMicroservices.SuperBootstrap.Base;
+using DesertCamel.BaseMicroservices.SuperConfig.Extensions;
 
 namespace DesertCamel.BaseMicroservices.SuperConfig
 {
@@ -13,12 +14,12 @@ namespace DesertCamel.BaseMicroservices.SuperConfig
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOptions();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
             services.AddSuperConfigProvider(Configuration);
+            services.AddBootstrapBase(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,8 +33,9 @@ namespace DesertCamel.BaseMicroservices.SuperConfig
             app.RunSuperConfigProviderMigration(Configuration);
 
             app.UseRouting();
-            app.UseSuperConfigCorsPolicy();
+            app.UseCors();
             app.UseAuthorization();
+            app.UseBootstrapBase();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
